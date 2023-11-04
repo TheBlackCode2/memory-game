@@ -1,0 +1,112 @@
+* {
+	margin : 0;
+	padding : 0;
+	box-sizing : border-box;
+}
+
+body {
+	background-color : #eee; /*#626162;*/
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cards-container {	
+	width : 445px;
+	display: flex;
+	flex-wrap: wrap;
+	/*display: grid;
+	grid-template-columns: repeat(4, 1fr);*/
+	gap : 15px;
+}
+
+.card {
+	perspective: 20em;
+	perspective-origin: center;
+}
+
+.card-content {
+	width : 100px;
+	height : 100px;
+	position: relative;
+	transform-origin: center;
+	transform-style: preserve-3d;
+	backface-visibility:hidden;
+	cursor: pointer;
+}
+
+.face {
+	width : inherit;
+	height : inherit;
+	position: absolute;
+	backface-visibility:hidden;
+	display: flex;
+	align-items: center;
+	justify-content: safe center;
+	border-radius: 10px;
+	box-shadow: 0 0 20px -10px #141214;
+}
+
+.face ion-icon {
+	font-size: 45px;
+	color : white;
+}
+
+.face.front {
+	background-color: #D9E928;
+  	transform: rotateY(180deg);
+}
+
+.face.back {
+	background-color: #141214;
+}
+
+.card.show .card-content {
+	animation : show_card 600ms ease-in-out forwards;
+}
+
+.card.hide .card-content {
+	animation : hide_card 600ms ease-in-out forwards;
+}
+
+
+@keyframes show_card {
+	0%{
+		transform: translateZ(0px) rotate3d(0, 1, 0, 0deg);	
+	}
+
+	20% {
+		transform: translateZ(30px) rotate3d(0, 1, 0, 0deg);
+	}
+
+	80% {
+		transform: translateZ(30px) rotate3d(0, 1, 0, -180deg);
+	}
+
+	100% {
+		transform: translateZ(0px) rotate3d(0, 1, 0, -180deg);
+	}
+}
+
+@keyframes hide_card {
+	0%{
+		transform: translateZ(0px) rotate3d(0, 1, 0, -180deg);
+	}
+
+	20% {
+		transform: translateZ(30px) rotate3d(0, 1, 0, -180deg);
+	}
+
+	80% {
+		transform: translateZ(30px) rotate3d(0, 1, 0, 0deg);
+	}
+
+	100% {
+		transform: translateZ(0px) rotate3d(0, 1, 0, 0deg);	
+	}
+}
+
+.cards.show-all .card-content {
+	animation : show_card 1s ease-in-out forwards;
+}
